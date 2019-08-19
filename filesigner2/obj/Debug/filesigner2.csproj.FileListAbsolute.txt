@@ -1,0 +1,9 @@
+C:\projects2\filesigner2\filesigner2\bin\Debug\filesigner2.exe
+C:\projects2\filesigner2\filesigner2\bin\Debug\filesigner2.pdb
+C:\projects2\filesigner2\filesigner2\obj\Debug\ResolveAssemblyReference.cache
+C:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.MainForm.resources
+C:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.Properties.Resources.resources
+C:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.csproj.GenerateResource.Cache
+C:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.exe
+C:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.pdb
+C:\projects2\filesigner2\filesigner2\bin\Debug\Ionic.Zip.dll
