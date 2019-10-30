@@ -196,7 +196,14 @@ namespace filesigner2
                 
                 //signedData.Content = Marshal.PtrToStringBSTR( utilities.ByteArrayToBinaryString(array));
                 ((CapiComRCW.ISignedData) signedData).set_Content(utilities.ByteArrayToBinaryString(array));
-                signedData.Verify(Convert.ToBase64String(array2), true, CAPICOM_SIGNED_DATA_VERIFY_FLAG.CAPICOM_VERIFY_SIGNATURE_ONLY);
+                try
+                {
+                    signedData.Verify(Convert.ToBase64String(array2), true, CAPICOM_SIGNED_DATA_VERIFY_FLAG.CAPICOM_VERIFY_SIGNATURE_ONLY);
+                }
+                catch (Exception e)
+                {
+                    errlist.Add("Ошибка проверки подписи!" + sFileIn + ":" + e.Message);
+                }
                 Store store2 = new StoreClass();
                 store2.Open(CAPICOM_STORE_LOCATION.CAPICOM_CURRENT_USER_STORE, "AddressBook", CAPICOM_STORE_OPEN_MODE.CAPICOM_STORE_OPEN_READ_WRITE);
                 for (int i = 1; i <= signedData.Signers.Count; i++)
@@ -243,7 +250,8 @@ namespace filesigner2
                     {
                         continue;
                     } 
-                    dell.Add(ze);
+                    if (!cbCoSign.Checked)
+                      dell.Add(ze);
                     continue;
                 }
                 sl.Add(ze);
@@ -258,11 +266,23 @@ namespace filesigner2
                 {
                     if (ze.IsDirectory) continue;
                     MemoryStream ms = new MemoryStream();
+                    MemoryStream mssign = new MemoryStream();
                     ze.Extract(ms);
+                    byte[] sarr;// = SignBuffer(ms.ToArray());
+                    if (cbCoSign.Checked && zf.EntryFileNames.Contains(ze.FileName + ".sig"))
+                    {
+                        ZipEntry signze = zf[ze.FileName + ".sig"];
+                        signze.Extract(mssign);
+                        sarr = CoSignBuffer(ms.ToArray(), mssign.ToArray());
+                        zf.RemoveEntry(signze);
 
-                    byte[] sarr = SignBuffer(ms.ToArray());
-                    if (sarr == null) return;
-                    if (zf.EntryFileNames.Contains(ze.FileName + ".sig")) continue;
+                    }
+                    else
+                    {
+                        sarr = SignBuffer(ms.ToArray());
+                        if (sarr == null) return;
+                        if (zf.EntryFileNames.Contains(ze.FileName + ".sig")) continue;
+                    }
                     ZipEntry sz = zf.AddEntry(ze.FileName + ".sig", sarr);
                 }
                 catch (Exception e)
@@ -271,6 +291,57 @@ namespace filesigner2
                 }
             }
             zf.Save();
+        }
+
+        private byte[] CoSignBuffer(byte[] data, byte[] signdata)
+        {
+            X509Certificate2 m_cert = cbCerts.SelectedItem as X509Certificate2;
+            if (m_cert == null)
+            {
+                MessageBox.Show("не найден сертификат!");
+                return null;
+            }
+            SignedData signedData = new SignedDataClass();
+            Utilities utilities = new UtilitiesClass();
+            byte[] array = data;
+
+            Signer signer = new SignerClass();
+            IStore store = new StoreClass();
+            bool flag2 = false;
+            store.Open(CAPICOM_STORE_LOCATION.CAPICOM_CURRENT_USER_STORE, "My", CAPICOM_STORE_OPEN_MODE.CAPICOM_STORE_OPEN_READ_ONLY);
+            foreach (ICertificate certificate in store.Certificates)
+            {
+                if (certificate.Thumbprint == m_cert.Thumbprint)
+                {
+                    signer.Certificate = certificate;
+                    flag2 = true;
+                    break;
+                }
+            }
+            if (!flag2)
+            {
+                throw new Exception("Не удалось найти сертификат подписи!");
+            }
+            CapiComRCW.Attribute attribute = new AttributeClass();
+            attribute.Name = CAPICOM_ATTRIBUTE.CAPICOM_AUTHENTICATED_ATTRIBUTE_SIGNING_TIME;
+            attribute.Value = DateTime.Now.ToUniversalTime();
+            signer.AuthenticatedAttributes.Add(attribute);
+            byte[] array3;
+            byte[] array2 = signdata;
+            ((CapiComRCW.ISignedData)signedData).set_Content(utilities.ByteArrayToBinaryString(array));
+            signedData.Verify(Convert.ToBase64String(array2), true, CAPICOM_SIGNED_DATA_VERIFY_FLAG.CAPICOM_VERIFY_SIGNATURE_ONLY);
+            Store store2 = new StoreClass();
+            store2.Open(CAPICOM_STORE_LOCATION.CAPICOM_CURRENT_USER_STORE, "AddressBook", CAPICOM_STORE_OPEN_MODE.CAPICOM_STORE_OPEN_READ_WRITE);
+            for (int i = 1; i <= signedData.Signers.Count; i++)
+            {
+                Signer signer2 = (Signer)signedData.Signers[i];
+                Certificate pVal = (Certificate)signer2.Certificate;
+                store2.Add(pVal);
+            }
+            store2.Close();
+            string s = signedData.CoSign(signer, CAPICOM_ENCODING_TYPE.CAPICOM_ENCODE_BASE64);
+            array3 = Convert.FromBase64String(s);
+            return array3;
         }
 
         private byte[] SignBuffer(byte[] arr)
@@ -365,6 +436,11 @@ namespace filesigner2
                 X509Certificate2 cert = cbCerts.SelectedItem as X509Certificate2;
                 tbCertInfo.Text = cbCerts.SelectedItem.ToString();
             }
+        }
+
+        private void cbCoSign_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -39,6 +39,7 @@
             this.tbCertInfo = new System.Windows.Forms.TextBox();
             this.cbNoEntryZIPSIGDelete = new System.Windows.Forms.CheckBox();
             this.cbPDFSignDelete = new System.Windows.Forms.CheckBox();
+            this.cbCoSign = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -110,9 +111,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lbErrs.FormattingEnabled = true;
-            this.lbErrs.Location = new System.Drawing.Point(66, 345);
+            this.lbErrs.Location = new System.Drawing.Point(66, 371);
             this.lbErrs.Name = "lbErrs";
-            this.lbErrs.Size = new System.Drawing.Size(594, 121);
+            this.lbErrs.Size = new System.Drawing.Size(594, 95);
             this.lbErrs.TabIndex = 6;
             // 
             // cbExtSignZIP
@@ -121,7 +122,7 @@
             this.cbExtSignZIP.AutoSize = true;
             this.cbExtSignZIP.Checked = true;
             this.cbExtSignZIP.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbExtSignZIP.Location = new System.Drawing.Point(272, 311);
+            this.cbExtSignZIP.Location = new System.Drawing.Point(312, 311);
             this.cbExtSignZIP.Name = "cbExtSignZIP";
             this.cbExtSignZIP.Size = new System.Drawing.Size(188, 17);
             this.cbExtSignZIP.TabIndex = 7;
@@ -163,6 +164,20 @@
             this.cbPDFSignDelete.Text = "Не удалять существующие подписи PDF";
             this.cbPDFSignDelete.UseVisualStyleBackColor = true;
             // 
+            // cbCoSign
+            // 
+            this.cbCoSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCoSign.AutoSize = true;
+            this.cbCoSign.Checked = true;
+            this.cbCoSign.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCoSign.Location = new System.Drawing.Point(312, 348);
+            this.cbCoSign.Name = "cbCoSign";
+            this.cbCoSign.Size = new System.Drawing.Size(240, 17);
+            this.cbCoSign.TabIndex = 7;
+            this.cbCoSign.Text = "Добавлять подпись к уже существующим";
+            this.cbCoSign.UseVisualStyleBackColor = true;
+            this.cbCoSign.CheckedChanged += new System.EventHandler(this.cbCoSign_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +186,7 @@
             this.Controls.Add(this.cbPDFSignDelete);
             this.Controls.Add(this.cbNoEntryZIPSIGDelete);
             this.Controls.Add(this.tbCertInfo);
+            this.Controls.Add(this.cbCoSign);
             this.Controls.Add(this.cbExtSignZIP);
             this.Controls.Add(this.lbErrs);
             this.Controls.Add(this.button2);
@@ -200,6 +216,7 @@
         private System.Windows.Forms.TextBox tbCertInfo;
         private System.Windows.Forms.CheckBox cbNoEntryZIPSIGDelete;
         private System.Windows.Forms.CheckBox cbPDFSignDelete;
+        private System.Windows.Forms.CheckBox cbCoSign;
     }
 }
 
