@@ -120,8 +120,6 @@
             // 
             this.cbExtSignZIP.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbExtSignZIP.AutoSize = true;
-            this.cbExtSignZIP.Checked = true;
-            this.cbExtSignZIP.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbExtSignZIP.Location = new System.Drawing.Point(312, 311);
             this.cbExtSignZIP.Name = "cbExtSignZIP";
             this.cbExtSignZIP.Size = new System.Drawing.Size(188, 17);
@@ -142,8 +140,6 @@
             // 
             this.cbNoEntryZIPSIGDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbNoEntryZIPSIGDelete.AutoSize = true;
-            this.cbNoEntryZIPSIGDelete.Checked = true;
-            this.cbNoEntryZIPSIGDelete.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbNoEntryZIPSIGDelete.Location = new System.Drawing.Point(520, 311);
             this.cbNoEntryZIPSIGDelete.Name = "cbNoEntryZIPSIGDelete";
             this.cbNoEntryZIPSIGDelete.Size = new System.Drawing.Size(156, 17);
@@ -155,8 +151,6 @@
             // 
             this.cbPDFSignDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbPDFSignDelete.AutoSize = true;
-            this.cbPDFSignDelete.Checked = true;
-            this.cbPDFSignDelete.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbPDFSignDelete.Location = new System.Drawing.Point(682, 311);
             this.cbPDFSignDelete.Name = "cbPDFSignDelete";
             this.cbPDFSignDelete.Size = new System.Drawing.Size(232, 17);
@@ -168,8 +162,6 @@
             // 
             this.cbCoSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbCoSign.AutoSize = true;
-            this.cbCoSign.Checked = true;
-            this.cbCoSign.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbCoSign.Location = new System.Drawing.Point(312, 348);
             this.cbCoSign.Name = "cbCoSign";
             this.cbCoSign.Size = new System.Drawing.Size(240, 17);
