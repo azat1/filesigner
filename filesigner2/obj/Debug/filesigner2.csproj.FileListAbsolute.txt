@@ -11,7 +11,9 @@ D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.exe
 D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.pdb
 D:\projects2\filesigner2\filesigner2\bin\Debug\filesigner2.exe
 D:\projects2\filesigner2\filesigner2\bin\Debug\filesigner2.pdb
-D:\projects2\filesigner2\filesigner2\obj\Debug\ResolveAssemblyReference.cache
 D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.MainForm.resources
 D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.Properties.Resources.resources
 D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.csproj.GenerateResource.Cache
+D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.csprojAssemblyReference.cache
+D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.csproj.CoreCompileInputs.cache
+D:\projects2\filesigner2\filesigner2\obj\Debug\filesigner2.csproj.CopyComplete

@@ -1,0 +1,10 @@
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.csprojAssemblyReference.cache
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.MainForm.resources
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.Properties.Resources.resources
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.csproj.GenerateResource.cache
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.csproj.CoreCompileInputs.cache
+D:\projects2\filesigner2\filesigner2\bin\Release\filesigner2.exe
+D:\projects2\filesigner2\filesigner2\bin\Release\filesigner2.pdb
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.csproj.CopyComplete
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.exe
+D:\projects2\filesigner2\filesigner2\obj\Release\filesigner2.pdb
