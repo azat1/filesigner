@@ -174,17 +174,19 @@ namespace filesigner2
                 
                 SignFile(item);
             }
-            MessageBox.Show("Завершено!");
+            MessageBox.Show("Завершено!"+String.Join("\r\n", errlist.ToArray()));
         }
 
         private void SignFile(string sFileIn)
         {
             try
             {
+                string sigfile = sFileIn + ".sig";
                 if (Path.GetExtension(sFileIn).ToUpper().Equals(".ZIP"))
                 {
                     SignZip(sFileIn);
                     if (!cbExtSignZIP.Checked) return;
+                    File.Delete(sigfile);
                 }
                 X509Certificate2 m_cert = (cbCerts.SelectedItem as CertificateItem).certificate;// X509Certificate2;
                 if (m_cert == null)
@@ -250,15 +252,15 @@ namespace filesigner2
                     {
                         errlist.Add("Ошибка проверки подписи!" + sFileIn + ":" + e.Message);
                     }
-                    Store store2 = new StoreClass();
-                    store2.Open(CAPICOM_STORE_LOCATION.CAPICOM_CURRENT_USER_STORE, "AddressBook", CAPICOM_STORE_OPEN_MODE.CAPICOM_STORE_OPEN_READ_WRITE);
-                    for (int i = 1; i <= signedData.Signers.Count; i++)
-                    {
-                        Signer signer2 = (Signer)signedData.Signers[i];
-                        Certificate pVal = (Certificate)signer2.Certificate;
-                        store2.Add(pVal);
-                    }
-                    store2.Close();
+                    //Store store2 = new StoreClass();
+                    //store2.Open(CAPICOM_STORE_LOCATION.CAPICOM_CURRENT_USER_STORE, "AddressBook", CAPICOM_STORE_OPEN_MODE.CAPICOM_STORE_OPEN_READ_WRITE);
+                    //for (int i = 1; i <= signedData.Signers.Count; i++)
+                    //{
+                    //    Signer signer2 = (Signer)signedData.Signers[i];
+                    //    Certificate pVal = (Certificate)signer2.Certificate;
+                    //    store2.Add(pVal);
+                    //}
+                    //store2.Close();
                     string s = signedData.CoSign(signer, CAPICOM_ENCODING_TYPE.CAPICOM_ENCODE_BASE64);
                     array3 = Convert.FromBase64String(s);
                 }
@@ -386,6 +388,7 @@ namespace filesigner2
             byte[] array3;
             byte[] array2 = signdata;
             ((CapiComRCW.ISignedData)signedData).set_Content(utilities.ByteArrayToBinaryString(array));
+
             signedData.Verify(Convert.ToBase64String(array2), true, CAPICOM_SIGNED_DATA_VERIFY_FLAG.CAPICOM_VERIFY_SIGNATURE_ONLY);
             Store store2 = new StoreClass();
             store2.Open(CAPICOM_STORE_LOCATION.CAPICOM_CURRENT_USER_STORE, "AddressBook", CAPICOM_STORE_OPEN_MODE.CAPICOM_STORE_OPEN_READ_WRITE);
@@ -396,6 +399,7 @@ namespace filesigner2
                 store2.Add(pVal);
             }
             store2.Close();
+
             string s = signedData.CoSign(signer, CAPICOM_ENCODING_TYPE.CAPICOM_ENCODE_BASE64);
             array3 = Convert.FromBase64String(s);
             return array3;
